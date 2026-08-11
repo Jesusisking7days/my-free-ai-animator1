@@ -92,12 +92,13 @@
                 const card = document.createElement('div');
                 card.className = "input-box rounded-xl overflow-hidden p-3 flex flex-col space-y-2";
                 
+                // Formulate target prompts using consolidated generation endpoints
                 const stringParts = promptValue + ", " + shot.text + ", anime key visual masterpiece, vibrant colors";
                 const cleanPrompt = encodeURIComponent(stringParts);
                 const randomSeed = Math.floor(Math.random() * 99999);
-                const finalImgURL = "https://pollinations.ai" + cleanPrompt + ".jpg?width=1024&height=576&seed=" + randomSeed + "&nologo=true";
+                const finalImgURL = "https://pollinations.ai" + cleanPrompt + "?width=1024&height=576&seed=" + randomSeed + "&nologo=true&model=flux";
 
-                // Clean direct image injection with loader parameters to completely clear proxy timeouts
+                // Direct image injection template mapping to stable endpoints
                 card.innerHTML = `
                     <div class="flex items-center justify-between border-b border-gray-800 pb-1 text-xs">
                         <span class="text-cyan-400 font-bold">${shot.title}</span>
