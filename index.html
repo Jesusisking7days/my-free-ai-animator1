@@ -22,7 +22,7 @@
         <span class="text-xs font-mono bg-black/40 border border-cyan-500/30 text-cyan-400 px-3 py-1 rounded-full">Server Cost: $0.00 / Free Forever</span>
     </header>
 
-    <!-- Main Content Workspace Layout -->
+    <!-- Main Workspace Layout -->
     <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         <!-- Input Frame Column -->
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <!-- Visual Tracking Output (Right Side Timeline) -->
+        <!-- Visual Tracking Output -->
         <div class="lg:col-span-2 studio-card p-5 rounded-2xl flex flex-col shadow-xl min-h-[450px]">
             <h3 class="text-xs uppercase tracking-widest text-gray-400 font-bold mb-4">Live Multi-Shot Timeline Output</h3>
             
@@ -101,18 +101,20 @@
                 `;
                 track.appendChild(card);
 
-                const finalQueryString = encodeURIComponent(`${promptValue}, ${shot.text}, anime key visual masterwork`);
+                // FIXED PARSING ENGINE STRING BLOCK
+                const stringParts = promptValue + ", " + shot.text + ", anime key visual masterpiece, vibrant colors";
+                const cleanPrompt = encodeURIComponent(stringParts);
                 const randomSeed = Math.floor(Math.random() * 99999);
-                const finalImgURL = `https://pollinations.ai{finalQueryString}?width=1024&height=576&seed=${randomSeed}&nologo=true`;
+                const finalImgURL = "https://pollinations.ai" + cleanPrompt + "?width=1024&height=576&seed=" + randomSeed + "&nologo=true";
 
                 const imagePreloader = new Image();
                 imagePreloader.src = finalImgURL;
                 imagePreloader.onload = function() {
-                    document.getElementById(`box-${shot.id}`).innerHTML = `<img src="${finalImgURL}" class="w-full h-full object-cover rounded" />`;
-                    logStatus("Video-Renderer", `${shot.title} frame drawn successfully.`);
+                    document.getElementById("box-" + shot.id).innerHTML = "<img src='" + finalImgURL + "' style='width:100%; height:100%; object-fit:cover;' class='rounded' />";
+                    logStatus("Video-Renderer", shot.title + " frame drawn successfully.");
                 };
                 imagePreloader.onerror = function() {
-                    document.getElementById(`box-${shot.id}`).innerText = "Render timeout. Retrying link layer...";
+                    document.getElementById("box-" + shot.id).innerText = "Server busy. Refresh and try again.";
                 };
             }
         }
