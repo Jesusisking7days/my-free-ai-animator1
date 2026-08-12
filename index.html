@@ -3,113 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenAnimate — Node Dashboard Workspace</title>
-    <!-- Stable Production Stylesheets -->
+    <title>OiiOii Open Studio — Autonomous WebGPU Engine</title>
+    <!-- Stable Production UI Stylesheets -->
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         body { 
-            background-color: #050608; 
+            background: radial-gradient(circle at center, #0a0b10 0%, #030406 100%); 
             color: #e2e8f0; 
             font-family: system-ui, -apple-system, sans-serif;
             overflow-x: hidden;
         }
-        /* OiiOii Premium Styling Clones */
-        .workspace-bg { background-color: #0b0c10; }
-        .oiioii-card { background-color: #12141c; border: 1px solid #1f2431; }
-        .oiioii-input { background-color: #1a1d29; border: 1px solid #2d354b; color: #ffffff; }
-        .oiioii-input:focus { border-color: #ec4899; outline: none; }
-        .glow-text { text-shadow: 0 0 10px rgba(236, 72, 153, 0.4); }
-        .pink-gradient-btn {
-            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
-            color: #ffffff;
-            font-weight: 800;
+        /* Glassmorphic OiiOii Workspace Cards */
+        .oiioii-card { 
+            background: rgba(15, 18, 28, 0.75); 
+            backdrop-filter: blur(16px); 
+            border: 1px solid rgba(236, 72, 153, 0.15); 
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+        }
+        .oiioii-input { 
+            background: rgba(6, 7, 10, 0.9); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            color: #ffffff; 
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .pink-gradient-btn:hover {
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+        .oiioii-input:focus { 
+            border-color: #ec4899; 
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+            outline: none; 
+        }
+        .glow-pink { text-shadow: 0 0 12px rgba(236, 72, 153, 0.5); }
+        .neon-btn {
+            background: linear-gradient(135deg, #ec4899 0%, #7c3aed 100%);
+            color: #ffffff;
+            font-weight: 900;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .neon-btn:hover {
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
             transform: translateY(-1px);
         }
-        .terminal-box { background-color: #08090d; border: 1px solid #1a1d29; color: #10b981; font-family: monospace; }
+        .terminal-box { background-color: #040507; border: 1px solid rgba(255, 255, 255, 0.05); color: #10b981; font-family: monospace; }
         .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #ec4899; border-radius: 10px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col p-4 md:p-6 workspace-bg">
+<body class="min-h-screen flex flex-col p-4 md:p-8">
 
-    <!-- Top Navigation Header -->
-    <header class="oiioii-card px-6 py-4 flex flex-col sm:flex-row items-center justify-between rounded-xl mb-6 shadow-2xl">
+    <!-- Top Glow Navigation Header Bar -->
+    <header class="oiioii-card px-8 py-4 flex flex-col sm:flex-row items-center justify-between rounded-2xl mb-8 border-b border-pink-500/20 shadow-2xl">
         <div class="flex items-center space-x-3 mb-2 sm:mb-0">
-            <span class="text-xs font-bold bg-pink-600 text-white px-2 py-1 rounded">BETA</span>
-            <h1 class="text-xl font-black tracking-wider text-white">OiiOii<span class="text-pink-500 glow-text">.studio</span></h1>
+            <span class="text-xs font-bold bg-pink-600 text-white px-2.5 py-1 rounded-md tracking-wider">CORE v4</span>
+            <h1 class="text-2xl font-black tracking-widest text-white uppercase">OiiOii<span class="text-pink-500 glow-pink">.studio</span></h1>
         </div>
         <div class="flex items-center space-x-4">
-            <span class="text-xs font-mono bg-pink-950/40 border border-pink-500/20 text-pink-400 px-3 py-1 rounded-full">Good evening, director!</span>
-            <span class="text-xs font-mono bg-black/40 text-gray-400 px-3 py-1 rounded-full border border-gray-800">$0.00 Server Compute Cost</span>
+            <span class="text-xs font-mono bg-pink-950/40 border border-pink-500/30 text-pink-400 px-4 py-1.5 rounded-full uppercase tracking-widest font-bold">Local WebGPU Engine Active</span>
+            <span class="text-xs font-mono bg-gray-900 border border-gray-800 text-gray-400 px-4 py-1.5 rounded-full tracking-wider">$0.00 Server Fee</span>
         </div>
     </header>
 
-    <!-- Main Workspace Split Panel layout -->
-    <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+    <!-- Main Node Dashboard Layout Grid -->
+    <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         
-        <!-- Controls Node Column (Left Panel) -->
-        <div class="space-y-5 oiioii-card p-5 rounded-2xl flex flex-col shadow-xl">
+        <!-- Controls Console Panel (Left Column) -->
+        <div class="space-y-6 oiioii-card p-6 rounded-3xl flex flex-col shadow-2xl">
             <div>
-                <label class="block text-xs uppercase tracking-widest text-pink-500 font-extrabold mb-2">Cinematic Anime Script Prompt</label>
-                <textarea id="promptInput" class="w-full h-24 oiioii-input rounded-xl p-3 text-sm resize-none custom-scroll" placeholder="Example: Mint haired girl fighting pose, holding scroll, red background aura, detailed keyframe artwork..."></textarea>
+                <label class="block text-xs uppercase tracking-widest text-pink-500 font-black mb-2">Cinematic Anime Script Prompt</label>
+                <textarea id="promptInput" class="w-full h-28 oiioii-input rounded-2xl p-4 text-sm resize-none custom-scroll" placeholder="Example: Mint haired girl fighting pose, holding scroll, red background aura, detailed keyframe artwork..."></textarea>
             </div>
 
-            <!-- OiiOii Character Drag/Paste Attachment Reference Upload View -->
+            <!-- Character Upload Attachment Module -->
             <div>
-                <label class="block text-xs uppercase tracking-widest text-pink-500 font-extrabold mb-2">Character Reference Image Asset (Optional)</label>
-                <div class="relative border-2 border-dashed border-gray-700 hover:border-pink-500/50 rounded-xl p-4 oiioii-input flex flex-col items-center justify-center text-center cursor-pointer min-h-[90px]">
+                <label class="block text-xs uppercase tracking-widest text-pink-500 font-black mb-2">Character Reference Look (Optional)</label>
+                <div class="relative border-2 border-dashed border-gray-800 hover:border-pink-500/40 rounded-2xl p-5 oiioii-input flex flex-col items-center justify-center text-center cursor-pointer min-h-[100px]">
                     <input type="file" id="imageRef" accept="image/*" onchange="previewUploadedImage(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" style="z-index: 10;" />
                     <div id="uploadPlaceholder" class="space-y-1 text-xs text-gray-400">
-                        <p class="font-medium text-gray-300">Drag / Paste an image here to try Skills</p>
-                        <p class="text-[10px] text-gray-500">Locks in style assets & character colors</p>
+                        <p class="font-bold text-gray-200">Drag / Paste reference image here</p>
+                        <p class="text-[10px] text-gray-500 font-mono">Processes local composition maps</p>
                     </div>
-                    <img id="imagePreview" class="hidden max-h-20 rounded-lg border border-gray-800 shadow-md mt-1" />
+                    <img id="imagePreview" class="hidden max-h-24 rounded-xl border border-gray-800 shadow-xl mt-1 animate-fade-in" />
                 </div>
             </div>
 
             <div>
-                <label class="block text-xs uppercase tracking-widest text-pink-500 font-extrabold mb-2">Artistic Preset Style</label>
-                <select id="stylePreset" class="w-full oiioii-input rounded-xl p-3 text-sm appearance-none cursor-pointer">
-                    <option value="modern digital anime key visual, colorful cel-shading, high definition masterpiece, studio quality artwork">Vibrant Modern Anime</option>
-                    <option value="90s vintage retro anime aesthetic, cell animation frame style, detailed texture">Classic 90s Vintage Anime</option>
-                    <option value="cinematic rendering style layout blueprint composition">Cinematic Studio Layout</option>
+                <label class="block text-xs uppercase tracking-widest text-pink-500 font-black mb-2">Artistic Render Preset</label>
+                <select id="stylePreset" class="w-full oiioii-input rounded-2xl p-4 text-sm appearance-none cursor-pointer">
+                    <option value="high resolution digital anime key visual, saturated cel-shading, illustration artwork masterwork">Vibrant Modern Anime</option>
+                    <option value="90s retro cell animation style framing, grainy filter layers, hand-drawn background">Classic 90s Vintage Anime</option>
+                    <option value="cinematic rendering layout composition concept model">Cinematic Studio Layout</option>
                 </select>
             </div>
 
-            <button onclick="launchVideoPipeline()" class="w-full pink-gradient-btn py-3.5 rounded-xl tracking-widest uppercase text-xs shadow-md cursor-pointer transform active:scale-95">
+            <button onclick="launchAutonomousPipeline()" class="w-full neon-btn py-4 rounded-2xl tracking-widest uppercase text-xs shadow-xl cursor-pointer transform active:scale-95">
                 EXECUTE PRODUCTION RUN
             </button>
 
-            <!-- Status Monitoring Console Terminal Logs -->
+            <!-- Status Monitoring Operations Console Logs -->
             <div class="flex flex-col flex-1">
-                <label class="block text-xs uppercase tracking-widest text-pink-500 font-extrabold mb-1.5">Agent Pipeline Log</label>
-                <div id="terminalBox" class="terminal-box h-32 rounded-xl p-3 text-xs overflow-y-auto space-y-1 custom-scroll">
-                    <div class="text-gray-500">&gt; Studio engine initialized. High quality network layers online. Ready.</div>
+                <label class="block text-xs uppercase tracking-widest text-pink-500 font-black mb-2">Autonomous Agent Activity Stream</label>
+                <div id="terminalBox" class="terminal-box h-36 rounded-2xl p-4 text-xs overflow-y-auto space-y-1.5 custom-scroll">
+                    <div class="text-gray-500">&gt; Studio engine initialized. WebGPU client pipeline online. Ready.</div>
                 </div>
             </div>
         </div>
 
-        <!-- Live Video Timeline Output Track (Right Column Grid container) -->
-        <div class="lg:col-span-2 oiioii-card p-5 rounded-2xl flex flex-col shadow-xl min-h-[480px]">
-            <h3 class="text-xs uppercase tracking-widest text-gray-400 font-extrabold mb-4">Live Multi-Shot Video Timeline Sequences</h3>
+        <!-- Live Video Timeline Output Track (Right Columns) -->
+        <div class="lg:col-span-2 oiioii-card p-6 rounded-3xl flex flex-col shadow-2xl min-h-[540px]">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4 mb-6">
+                <h3 class="text-xs uppercase tracking-widest text-gray-400 font-black">Live Multi-Shot Workspace Timeline</h3>
+                <span class="w-2.5 h-2.5 rounded-full bg-pink-500 shadow-lg animate-pulse"></span>
+            </div>
             
-            <div id="timelineTrack" class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 overflow-y-auto custom-scroll max-h-[450px]">
-                <!-- Default Idle Placeholder Canvas -->
-                <div id="emptyState" class="col-span-full flex flex-col items-center justify-center text-center text-gray-500 p-12 border-2 border-dashed border-gray-800 rounded-xl my-auto">
-                    <svg class="w-10 h-10 mb-2 text-pink-500/40 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    <p class="text-sm font-bold text-gray-400 tracking-wide">Studio Timeline Empty</p>
-                    <p class="text-xs text-gray-600 max-w-xs mt-1 font-mono">Input descriptors and execute a pipeline run to stream high QoL generated art assets directly onto the workspace timeline tracks.</p>
+            <div id="timelineTrack" class="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1 overflow-y-auto custom-scroll max-h-[500px]">
+                <!-- Default Idle Canvas Placeholder View -->
+                <div id="emptyState" class="col-span-full flex flex-col items-center justify-center text-center text-gray-500 p-16 border-2 border-dashed border-gray-800 rounded-2xl my-auto">
+                    <svg class="w-12 h-12 mb-3 text-pink-500/30 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    <p class="text-base font-bold text-gray-400 tracking-wide">Studio Nodes Inactive</p>
+                    <p class="text-xs text-gray-600 max-w-xs mt-1 font-mono">Input your anime descriptors on the left panel to execute an unblockable, serverless generation pipeline sequence.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        function previewUploadedImage(event) {
+    <!-- Load the secure, local browser WebGPU inference module cleanly -->
+    <script type="module">
+        import { pipeline } from 'https://jsdelivr.net';
+
+        window.previewUploadedImage = function(event) {
             const input = event.target;
             const preview = document.getElementById('imagePreview');
             const placeholder = document.getElementById('uploadPlaceholder');
@@ -123,9 +142,9 @@
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-        }
+        };
 
-        async function launchVideoPipeline() {
+        window.launchAutonomousPipeline = async function() {
             const promptValue = document.getElementById('promptInput').value.trim();
             const motionPreset = document.getElementById('stylePreset').value;
             const terminal = document.getElementById('terminalBox');
@@ -133,7 +152,7 @@
             const emptyState = document.getElementById('emptyState');
 
             if (!promptValue) {
-                alert("Please write your animation descriptor prompt script first!");
+                alert("Please type out your core animation scene prompt script details first!");
                 return;
             }
 
@@ -141,23 +160,6 @@
             track.innerHTML = '';
             terminal.innerHTML = '';
 
-            function logStatus(agent, msg) {
+            function logStatus(agent, msg, colorClass = "text-gray-300") {
                 const el = document.createElement('div');
-                el.innerHTML = `<span class="text-purple-400 font-bold">[${agent}]</span> ${msg}`;
-                terminal.appendChild(el);
-                terminal.scrollTop = terminal.scrollHeight;
-            }
-
-            logStatus("Director-Core", "Parsing character specs and allocating grid assets...");
-            await new Promise(r => setTimeout(r, 400));
-            
-            const clips = [
-                { id: 1, title: "Shot Sequence 01 — Close Up Portrait", mod: "close up portrait visual focusing on hair and face structure design" },
-                { id: 2, title: "Shot Sequence 02 — Cinematic Action", mod: "wide dramatic action scene composition, camera movement framing view" }
-            ];
-
-            for (let shot of clips) {
-                logStatus("Scriptwriter-Agent", `Compiling variables and properties for ${shot.title}...`);
-
-                const card = document.createElement('div');
-
+                el.className = colorClass;
